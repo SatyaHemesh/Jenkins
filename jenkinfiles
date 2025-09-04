@@ -1,0 +1,24 @@
+pipeline {
+    agent any
+    stages {
+        stage('Checkout Code') {
+            steps {
+                // Replace with your actual repo URL and branch
+                git branch: 'main', url: 'https://github.com/SatyaHemesh/Jenkins.git'
+            }
+        }
+        stage('Publish HTML Report') {
+            steps {
+                // If form.html is at the repo root, use '.'
+                publishHTML(target: [
+                    allowMissing: false,
+                    alwaysLinkToLastBuild: true,
+                    keepAll: true,
+                    reportDir: '.',         // directory containing form.html
+                    reportFiles: 'form.html', // file to publish
+                    reportName: 'Student Registration Form'
+                ])
+            }
+        }
+    }
+}
